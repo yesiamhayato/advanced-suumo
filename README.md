@@ -1,24 +1,56 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# テーブル設計
 
-Things you may want to cover:
+## users テーブル
 
-* Ruby version
+| Column               | Type    | Options     |
+| -------------------- | ------- | ----------- |
+| user_type_id         | integer | null: false |
+| email                | string  | null: false |
+| encrypted_password   | string  | null: false |
+| nickname             | date    | null: false |
+| last_name            | string  | null: false |
+| first_name           | string  | null: false |
+| last_name_kana       | string  | null: false |
+| first_name_kana      | string  | null: false |
+| birthday             | date    | null: false |
+| income_id            | integer |             |
 
-* System dependencies
+### Association
 
-* Configuration
+- has_many :demands
+- has_one :profile
 
-* Database creation
+## demands テーブル
 
-* Database initialization
+| Column              | Type            | Options                        |
+| ------------------- | --------------- | ------------------------------ |
+| deal_type_id        | integer         | null: false                    |
+| train_line          | string          |                                |
+| station_distance_id | integer         |                                |
+| area_id             | integer         |                                |
+| size_id             | integer         |                                |
+| budget_id           | integer         |                                |
+| condition_id        | integer         |                                |
+| priority_id         | integer         |                                |
+| details             | text            |                                |
+| user                | references      | null: false, foreign_key: true |
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
 
-* Deployment instructions
+## profiles テーブル
 
-* ...
+| Column            | Type       | Options                        |
+| ----------------- | ---------- | ------------------------------ |
+| company_name      | string     |                                |
+| company_location  | string     |                                |
+| info              | text       |                                |
+| user              | references | null: false, foreign_key: true |
+
+
+### Association
+
+- belongs_to :user
