@@ -20,5 +20,12 @@ class User < ApplicationRecord
       validates :last_name_kana
       validates :first_name_kana
     end
+
+    validates :user_type_id, numericality: { other_than: 1 }
+
   end
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :user_type
+
 end
